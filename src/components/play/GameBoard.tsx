@@ -3,6 +3,8 @@ import React from 'react'
 interface IProps {
     time: number
     diff: number
+    playerA: number
+    playerB: number
 }
 
 interface IState {
@@ -51,6 +53,8 @@ export default class GameBoard extends React.Component<IProps, IState> {
         return (
             <div style={{ width, height, position: 'relative', border: '2px dashed white' }}>
                 <Ball x={this.state.x} y={this.state.y} />
+                <PlayerA y={this.props.playerA} />
+                <PlayerB y={this.props.playerB} />
             </div>
         )
     }
@@ -68,4 +72,12 @@ const Ball = ({ x, y }) => (
             position: 'absolute',
         }}
     />
+)
+
+const PlayerA = ({ y }) => <Player x={-20} y={y} />
+
+const PlayerB = ({ y }) => <Player x={width} y={y} />
+
+const Player = ({ x, y, height = 200 }) => (
+    <div style={{ backgroundColor: 'white', width: 20, height, position: 'absolute', top: y, left: x }} />
 )

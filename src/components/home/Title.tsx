@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import Style from 'styles'
 
 const styles = {
@@ -11,11 +11,15 @@ const styles = {
         userSelect: 'none',
     } as const,
     kick: {
-        fontWeight: 800
+        fontWeight: 800,
     },
     it: {
         fontWeight: 300,
-    }
+    },
 }
 
-export default () => <div style={styles.common}><span style={styles.kick}>Kick</span> <span style={styles.it}>It</span></div>
+export default () => (
+    <div style={styles.common}>
+        <span style={styles.kick}>Kick</span> <span style={styles.it}>It</span>
+    </div>
+)

@@ -1,49 +1,40 @@
 import React from 'react'
 import GameBoard from './GameBoard'
+import GameTimer from './GameTimer'
 
 export default class GameController extends React.Component {
-    public state = { duration: 0, frameLength: 0, paused: true }
-    private frameId: number | undefined
-    private startTime: number
-    private paused = false
+    private playerA = 50
+    private playerB = 0
     public componentDidMount() {
-        this.startLoop()
-        window.addEventListener('blur', this.onBlur)
-        window.addEventListener('focus', this.onFocus)
-    }
-    public componentWillUnmount() {
-        this.stopLoop()
+        window.addEventListener('keydown', this.onKeyDown)
     }
     public render() {
-        return <GameBoard time={this.state.duration} diff={this.state.frameLength} />
+        return (
+            <GameTimer>
+                {({ duration, frameLength }) => (
+                    <GameBoard playerA={this.playerA} playerB={this.playerB} time={duration} diff={frameLength} />
+                )}
+            </GameTimer>
+        )
     }
-    private loop = () => {
-        const duration = Date.now() - this.startTime
-        const lastDuration = this.state.duration
-        this.setState({ duration, frameLength: lastDuration === 0 ? 0 : duration - lastDuration })
-        if (!this.paused) {
-            this.frameId = window.requestAnimationFrame(this.loop)
+    private onKeyDown = e => {
+        switch (e.key) {
+            case 'i': {
+                this.playerB = Math.max(this.playerB - 10, 0)
+                return
+            }
+            case 'k': {
+                this.playerB = Math.min(this.playerB + 10, 700)
+                return
+            }
+            case 'e': {
+                this.playerA = Math.max(this.playerA - 10, 0)
+                return
+            }
+            case 'd': {
+                this.playerA = Math.min(this.playerA + 10, 700)
+                return
+            }
         }
-    }
-    private startLoop = () => {
-        if (this.frameId === undefined) {
-            this.startTime = Date.now()
-            this.paused = false
-            this.frameId = window.requestAnimationFrame(this.loop)
-        }
-    }
-    private stopLoop() {
-        if (this.frameId !== undefined) {
-            window.cancelAnimationFrame(this.frameId)
-        }
-    }
-    private onBlur = () => {
-        this.paused = true
-        this.frameId = undefined
-        this.setState({ duration: 0 })
-    }
-    private onFocus = () => {
-        this.paused = false
-        this.startLoop()
     }
 }
