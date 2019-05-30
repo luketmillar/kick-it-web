@@ -38,13 +38,11 @@ export default class GameController extends React.Component {
         }
     }
     private onBlur = () => {
-        console.log('blur')
         this.paused = true
         this.frameId = undefined
         this.setState({ duration: 0 })
     }
     private onFocus = () => {
-        console.log('focus')
         this.paused = false
         this.startLoop()
     }
