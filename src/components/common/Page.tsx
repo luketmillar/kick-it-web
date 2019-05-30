@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
 import Styles from 'styles'
 
 const styles = {
@@ -9,11 +9,12 @@ const styles = {
     top: 0,
     left: 0,
     bottom: 0,
-    right: 0
+    right: 0,
 } as const
 
 interface IProps {
     children: ReactNode
+    style?: React.CSSProperties
 }
 
-export default ({children}: IProps) => <div style={styles}>{children}</div>
+export default ({ children, style }: IProps) => <div style={{ ...styles, ...style }}>{children}</div>
