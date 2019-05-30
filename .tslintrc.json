@@ -1,0 +1,26 @@
+{
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-prettier",
+        "tslint-plugin-prettier"
+    ],
+    "rules": {
+        "prettier": [
+            true,
+            ".prettierrc.js"
+        ],
+        "variable-name": {
+            "options": [
+                "ban-keywords"
+            ]
+        },
+        "object-literal-sort-keys": false,
+        "no-shadowed-variable": false,
+        "one-variable-per-declaration": false,
+        "max-classes-per-file": false,
+        "ban-types": false
+    },
+    "linterOptions": {
+        "exclude": ["node_modules/**"]
+    }
+}

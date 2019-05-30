@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@components": ["/components"]
+        },
+        "allowJs": true,
+        "target": "es6",
+        "lib": [
+            "es5",
+            "dom",
+            "scripthost",
+            "es6",
+            "es2017"
+        ],
+        "module": "commonjs",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "pretty": true,
+        "esModuleInterop": true,
+        "isolatedModules": false,
+        "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "sourceMap": true,
+        "noImplicitThis": true,
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "eslint.enable": true,
+    "eslint.options": {
+      "configFile": ".eslintrc.js"
+    },
+    "tslint.configFile": ".tslintrc.json",
+    "eslint.autoFixOnSave": true,
+    "tslint.autoFixOnSave": true,
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bundles": true,
+      "**/.cache-loader/**": true,
+      "**/.awcache/**": true,
+      "**/vendor/**": true,
+    },
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/**": true,
+      "**/.cache-loader/**": true,
+      "**/.awcache/**": true,
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "prettier.semi": false
+  }

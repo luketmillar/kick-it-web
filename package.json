@@ -13,11 +13,19 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
+    "eslint": "^5.16.0",
     "gatsby": "^2.7.3",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.2",
+    "gatsby-plugin-typescript": "^2.0.15",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.5.1"
   },
   "devDependencies": {
+    "gatsby-plugin-root-import": "^2.0.5",
     "prettier": "^1.17.1"
   },
   "repository": {
