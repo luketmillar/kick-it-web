@@ -1,12 +1,12 @@
-import React, { MouseEventHandler } from 'react'
 import PlayIcon from 'components/icons/play'
-import Style from 'styles'
 import useInteraction from 'hooks/useInteraction'
+import React, { MouseEventHandler } from 'react'
+import Style from 'styles'
 
 const colors = {
     default: Style.color.button.default,
     hover: Style.color.button.hover,
-    down: Style.color.button.down
+    down: Style.color.button.down,
 }
 
 const styles = {
@@ -14,7 +14,7 @@ const styles = {
 }
 
 const hoverStyles = {
-    transform: 'rotate(120deg)'
+    transform: 'rotate(120deg)',
 }
 
 interface IProps {
@@ -25,7 +25,10 @@ const PlayButton = ({ onClick }: IProps) => {
     const [isHovered, isDown, ref] = useInteraction()
     return (
         <div style={styles} ref={ref} onClick={onClick}>
-            <PlayIcon style={{transition: 'transform 200ms ease', ...(( isHovered || isDown ) && hoverStyles)}} color={isHovered ? colors.hover : isDown ? colors.down : colors.default} />
+            <PlayIcon
+                style={{ transition: 'transform 200ms ease', ...((isHovered || isDown) && hoverStyles) }}
+                color={isHovered ? colors.hover : isDown ? colors.down : colors.default}
+            />
         </div>
     )
 }

@@ -11,10 +11,11 @@ export default {
     ball: {
         color: '#ffffff',
         size: 30,
-        speed: 500,
+        speed: 2,
     },
     player: {
-        size: 200,
+        height: 200,
+        width: 20,
         color: '#ffffff',
     },
 }

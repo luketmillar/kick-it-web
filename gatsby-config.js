@@ -17,6 +17,7 @@ module.exports = {
                 components: path.join(__dirname, 'src/components'),
                 styles: path.join(__dirname, 'src/styles'),
                 hooks: path.join(__dirname, 'src/hooks'),
+                model: path.join(__dirname, 'src/model'),
             },
         },
         {
