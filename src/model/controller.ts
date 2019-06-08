@@ -32,7 +32,7 @@ export default class Controller {
         this.playerA = new Components.Player(
             gameValues.player.height,
             {
-                right: 0,
+                left: 0,
                 centerY: gameValues.board.height / 2,
             },
             true
@@ -40,7 +40,7 @@ export default class Controller {
         this.playerB = new Components.Player(
             gameValues.player.height,
             {
-                left: gameValues.board.width,
+                right: gameValues.board.width,
                 centerY: gameValues.board.height / 2,
             },
             false
@@ -52,6 +52,7 @@ export default class Controller {
 
     public startGame() {
         this.gameBall.reset()
+        this.effectBalls = []
         this.frameTimer.start()
     }
 
@@ -89,32 +90,53 @@ export default class Controller {
         this.components.forEach(component => component.onFrame(i, frameLength, duration, { ball: this.gameBall }))
 
         // collision detection
-        if (this.gameBall.collision(this.bottomWall)) {
-            this.gameBall.setVelocityDirection({ y: -1 })
-        }
-        if (this.gameBall.collision(this.topWall)) {
-            this.gameBall.setVelocityDirection({ y: 1 })
-        }
         if (this.gameBall.collision(this.playerA)) {
             this.gameBall.setVelocityDirection({ x: 1 })
-        } else if (this.gameBall.collision(this.leftWall)) {
-            this.endGame()
+            this.lastHitBy = this.playerA
         }
         if (this.gameBall.collision(this.playerB)) {
             this.gameBall.setVelocityDirection({ x: -1 })
-        } else if (this.gameBall.collision(this.rightWall)) {
+            this.lastHitBy = this.playerB
+        }
+        if (this.gameBall.collision(this.leftWall)) {
             this.endGame()
         }
+        if (this.gameBall.collision(this.rightWall)) {
+            this.endGame()
+        }
+
+        this.balls.forEach(ball => {
+            if (ball.collision(this.bottomWall)) {
+                ball.setVelocityDirection({ y: -1 })
+            }
+            if (ball.collision(this.topWall)) {
+                ball.setVelocityDirection({ y: 1 })
+            }
+            if (ball !== this.gameBall) {
+                if (ball.collision(this.leftWall)) {
+                    ball.setVelocityDirection({ x: 1 })
+                }
+                if (ball.collision(this.rightWall)) {
+                    ball.setVelocityDirection({ x: -1 })
+                }
+            }
+        })
 
         this.effectBalls = this.effectBalls.filter(effectBall => {
             if (effectBall.collision(this.gameBall)) {
                 effectBall.onHit(this.gameBall, this.playerA, this.playerB)
                 return false
             }
+            if (effectBall.collision(this.playerA)) {
+                return false
+            }
+            if (effectBall.collision(this.playerB)) {
+                return false
+            }
             return true
         })
 
-        if (i % 600 === 0) {
+        if (i !== 0 && i % 600 === 0) {
             this.effectBalls = this.effectBalls.concat([EffectBalls.createRandomEffect()])
         }
 
@@ -122,21 +144,10 @@ export default class Controller {
     }
 
     public get components(): Components.Base[] {
-        return [
-            this.gameBall,
-            ...this.effectBalls,
-            this.bottomWall,
-            this.topWall,
-            this.leftWall,
-            this.rightWall,
-            this.playerA,
-            this.playerB,
-        ]
+        return [...this.balls, this.bottomWall, this.topWall, this.leftWall, this.rightWall, this.playerA, this.playerB]
+    }
+
+    public get balls(): Components.Ball[] {
+        return [this.gameBall, ...this.effectBalls]
     }
 }
-
-// const angle = ((Math.random() * 45 + 22) * Math.PI) / 180
-// const velocity = {
-//     horizontal: GameValues.ball.speed * Math.cos(angle),
-//     vertical: GameValues.ball.speed * Math.sin(angle),
-// }

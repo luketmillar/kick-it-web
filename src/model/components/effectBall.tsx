@@ -13,6 +13,7 @@ const getRandomPosition = (): Point => ({
 export default class EffectBall extends Ball {
     constructor(color: string, radius: number) {
         super(color, radius, getRandomPosition())
+        this.setVelocity(math.getVelocity(math.randomAngle(), math.randomSpeed(0.25, 1)))
     }
     public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
         throw new Error('unimplemented EffectBall.onHit')
