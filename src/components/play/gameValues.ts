@@ -10,7 +10,7 @@ export default {
     },
     ball: {
         color: '#ffffff',
-        size: 30,
+        size: 10,
         speed: 2,
     },
     player: {

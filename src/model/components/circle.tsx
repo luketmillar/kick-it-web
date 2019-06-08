@@ -6,8 +6,8 @@ import Component from './component'
 
 export default class Circle extends Component {
     public color: string
-    constructor(color: string, size: number, position: Point) {
-        super(new Bounds({ width: size, height: size, centerX: position.x, centerY: position.y }))
+    constructor(color: string, radius: number, position: Point) {
+        super(new Bounds({ width: radius * 2, height: radius * 2, centerX: position.x, centerY: position.y }))
         this.color = color
     }
     public draw(): React.ReactNode {

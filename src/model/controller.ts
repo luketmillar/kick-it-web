@@ -7,7 +7,7 @@ export default class Controller {
     private readonly frameTimer: FrameTimer
     private readonly onFrame: () => void
 
-    private readonly gameBall: Components.Ball
+    private readonly gameBall: Components.GameBall
     private effectBalls: Components.EffectBall[]
     private readonly bottomWall: Components.Rectangle
     private readonly topWall: Components.Rectangle
@@ -15,6 +15,8 @@ export default class Controller {
     private readonly rightWall: Components.Rectangle
     private readonly playerA: Components.Player
     private readonly playerB: Components.Player
+
+    private lastHitBy: Components.Player | undefined
 
     constructor(onFrame: () => void) {
         this.frameTimer = new FrameTimer(this.handleFrame)
@@ -44,16 +46,12 @@ export default class Controller {
             false
         )
 
+        this.lastHitBy = undefined
         this.onFrame = onFrame
     }
 
     public startGame() {
-        const angle = ((Math.random() * 45 + 22) * Math.PI) / 180
-        this.gameBall.setVelocity({
-            x: gameValues.ball.speed * Math.cos(angle),
-            y: gameValues.ball.speed * Math.sin(angle),
-        })
-
+        this.gameBall.reset()
         this.frameTimer.start()
     }
 
@@ -72,6 +70,11 @@ export default class Controller {
 
     public stop() {
         this.frameTimer.stop()
+    }
+
+    public endGame() {
+        this.stop()
+        this.startGame()
     }
 
     public movePlayerUp() {
@@ -95,12 +98,12 @@ export default class Controller {
         if (this.gameBall.collision(this.playerA)) {
             this.gameBall.setVelocityDirection({ x: 1 })
         } else if (this.gameBall.collision(this.leftWall)) {
-            this.pause()
+            this.endGame()
         }
         if (this.gameBall.collision(this.playerB)) {
             this.gameBall.setVelocityDirection({ x: -1 })
         } else if (this.gameBall.collision(this.rightWall)) {
-            this.pause()
+            this.endGame()
         }
 
         this.effectBalls = this.effectBalls.filter(effectBall => {

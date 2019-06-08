@@ -5,7 +5,7 @@ import EffectBall from './effectBall'
 
 export class GrowEffect extends EffectBall {
     constructor() {
-        super('black', 50)
+        super('black', 25)
     }
     public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
         gameBall.setRadius(gameBall.radius * 2)
@@ -14,7 +14,7 @@ export class GrowEffect extends EffectBall {
 
 export class ShrinkEffect extends EffectBall {
     constructor() {
-        super('red', 10)
+        super('red', 5)
     }
     public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
         gameBall.setRadius(gameBall.radius / 2)
@@ -23,7 +23,7 @@ export class ShrinkEffect extends EffectBall {
 
 export class SpeedUpEffect extends EffectBall {
     constructor() {
-        super('teal', 30)
+        super('teal', 15)
     }
     public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
         const velocity = gameBall.getVelocity()
@@ -33,7 +33,7 @@ export class SpeedUpEffect extends EffectBall {
 
 export class SlowDownEffect extends EffectBall {
     constructor() {
-        super('orange', 30)
+        super('orange', 15)
     }
     public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
         const velocity = gameBall.getVelocity()
