@@ -1,6 +1,8 @@
 import gameValues from 'components/play/gameValues'
+import Drawables from 'model/drawables'
 import * as math from 'model/utils/math'
 import Point from 'model/utils/point'
+import React from 'react'
 import { Player } from '.'
 import Ball from './ball'
 
@@ -12,12 +14,27 @@ const getRandomPosition = (): Point => ({
 
 const getRandomVelocity = () => math.getVelocity(math.randomAngle(0, 360), math.randomSpeed(0.25, 1))
 
-export default class EffectBall extends Ball {
-    constructor(color: string, radius: number) {
-        super(color, radius, getRandomPosition())
-        this.setVelocity(getRandomVelocity())
+export default abstract class EffectBall extends Ball {
+    constructor() {
+        super('', 30, getRandomPosition(), getRandomVelocity())
     }
-    public onHit(gameBall: Ball, playerA: Player, playerB: Player) {
+    public onHit(item: Ball | Player) {
         throw new Error('unimplemented EffectBall.onHit')
     }
+    public draw() {
+        return (
+            <Drawables.Wrapper bounds={this.bounds}>
+                <svg
+                    width={this.diameter}
+                    height={this.diameter}
+                    viewBox="0 0 73 73"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    {this.svgContents()}
+                </svg>
+            </Drawables.Wrapper>
+        )
+    }
+    public abstract svgContents(): React.ReactNode
 }

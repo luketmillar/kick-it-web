@@ -13,8 +13,8 @@ export default class Controller {
     private readonly topWall: Components.Rectangle
     private readonly leftWall: Components.Rectangle
     private readonly rightWall: Components.Rectangle
-    private readonly playerA: Components.Player
-    private readonly playerB: Components.Player
+    private playerA: Components.Player
+    private playerB: Components.Player
 
     private lastHitBy: Components.Player | undefined
 
@@ -53,6 +53,23 @@ export default class Controller {
     public startGame() {
         this.gameBall.reset()
         this.effectBalls = []
+        this.lastHitBy = undefined
+        this.playerA = new Components.Player(
+            gameValues.player.height,
+            {
+                left: 0,
+                centerY: gameValues.board.height / 2,
+            },
+            true
+        )
+        this.playerB = new Components.Player(
+            gameValues.player.height,
+            {
+                right: gameValues.board.width,
+                centerY: gameValues.board.height / 2,
+            },
+            false
+        )
         this.frameTimer.start()
     }
 
@@ -79,11 +96,11 @@ export default class Controller {
     }
 
     public movePlayerUp() {
-        this.playerB.translate({ y: -10 })
+        this.playerB.translate({ y: -1 * this.playerB.movementSpeed })
     }
 
     public movePlayerDown() {
-        this.playerB.translate({ y: 10 })
+        this.playerB.translate({ y: this.playerB.movementSpeed })
     }
 
     private handleFrame = (i: number, frameLength: number, duration: number) => {
@@ -124,13 +141,15 @@ export default class Controller {
 
         this.effectBalls = this.effectBalls.filter(effectBall => {
             if (effectBall.collision(this.gameBall)) {
-                effectBall.onHit(this.gameBall, this.playerA, this.playerB)
+                effectBall.onHit(this.gameBall)
                 return false
             }
             if (effectBall.collision(this.playerA)) {
+                effectBall.onHit(this.playerA)
                 return false
             }
             if (effectBall.collision(this.playerB)) {
+                effectBall.onHit(this.playerB)
                 return false
             }
             return true

@@ -1,21 +1,20 @@
 export default {
     background: {
-        color: '#682BCD',
+        color: '#fff',
     },
     board: {
-        color: '#682BCD',
         width: 1200,
         height: 600,
-        border: '#ffffff',
+        border: '#555',
     },
     ball: {
-        color: '#ffffff',
-        size: 10,
-        speed: 2,
+        color: '#555',
+        size: 15,
+        speed: 1.3,
     },
     player: {
         height: 200,
-        width: 20,
-        color: '#ffffff',
+        width: 30,
+        color: '#555',
     },
 }

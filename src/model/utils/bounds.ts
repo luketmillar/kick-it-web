@@ -97,6 +97,10 @@ export default class Bounds {
         return new Bounds({ width, height, centerX: this.centerX, centerY: this.centerY })
     }
 
+    public setHeight = (height: number): Bounds => {
+        return this.setSize(this.width, height)
+    }
+
     public setTop = (y: number): Bounds => {
         return new Bounds({ width: this.width, height: this.height, centerX: this.centerX, top: y })
     }

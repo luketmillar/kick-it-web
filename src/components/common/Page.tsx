@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import Styles from 'styles'
 
 const styles = {
-    backgroundColor: Styles.color.purple,
+    backgroundColor: Styles.color.aqua, // Styles.color.purple,
     fontFamily: Styles.type.family.primary,
     color: Styles.color.text.primary,
     position: 'absolute',

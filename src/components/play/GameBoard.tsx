@@ -7,8 +7,10 @@ const GameBoard = ({ children }) => (
             width: GameValues.board.width,
             height: GameValues.board.height,
             position: 'relative',
-            border: `2px dashed ${GameValues.board.border}`,
-            backgroundColor: GameValues.board.color,
+            borderRadius: 20,
+            overflow: 'hidden',
+            border: `4px dashed ${GameValues.board.border}`,
+            // backgroundColor: GameValues.board.color,
         }}
     >
         {children}

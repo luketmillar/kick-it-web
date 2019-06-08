@@ -39,4 +39,26 @@ export default class Ball extends Circle {
     public setRadius(radius: number) {
         this.setSize({ x: radius * 2, y: radius * 2 })
     }
+
+    public grow() {
+        this.setRadius(this.radius * 2)
+    }
+
+    public shrink() {
+        this.setRadius(this.radius / 2)
+    }
+
+    public speedUp() {
+        if (this.velocity === undefined) {
+            throw new Error('cannot speed up a ball with no velocity')
+        }
+        this.setVelocity({ x: this.velocity.x * 1.2, y: this.velocity.y * 1.2 })
+    }
+
+    public slowDown() {
+        if (this.velocity === undefined) {
+            throw new Error('cannot slow down a ball with no velocity')
+        }
+        this.setVelocity({ x: this.velocity.x / 1.2, y: this.velocity.y / 1.2 })
+    }
 }
