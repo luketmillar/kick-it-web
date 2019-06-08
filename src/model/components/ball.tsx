@@ -1,11 +1,10 @@
-import GameValues from 'components/play/gameValues'
 import Point from 'model/utils/point'
 import Circle from './circle'
 
 export default class Ball extends Circle {
     private velocity: Point | undefined
-    constructor(position: Point, velocity?: Point) {
-        super(GameValues.ball.color, GameValues.ball.size, position)
+    constructor(color: string, radius: number, position: Point, velocity?: Point) {
+        super(color, radius, position)
         this.velocity = velocity
     }
 
@@ -13,7 +12,7 @@ export default class Ball extends Circle {
         if (this.velocity === undefined) {
             return
         }
-        this.translate({ x: (this.velocity.x * frameLength) / 5, y: (this.velocity.y * frameLength) / 5 })
+        this.translate({ x: (this.velocity.x * frameLength) / 4, y: (this.velocity.y * frameLength) / 4 })
     }
 
     public setVelocityDirection(direction: { x?: number; y?: number }) {
@@ -26,7 +25,18 @@ export default class Ball extends Circle {
         }
     }
 
+    public getVelocity(): Point {
+        if (this.velocity === undefined) {
+            throw new Error('unexpected velocity to be undefined')
+        }
+        return this.velocity
+    }
+
     public setVelocity(velocity: Point) {
         this.velocity = velocity
+    }
+
+    public setRadius(radius: number) {
+        this.setSize({ x: radius * 2, y: radius * 2 })
     }
 }

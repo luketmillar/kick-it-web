@@ -9,3 +9,7 @@ export const distance = (a: Point, b: Point): number => {
 export const clamp = (value: number, min: number, max: number): number => {
     return Math.max(Math.min(value, max), min)
 }
+
+export const random = (min: number, max: number): number => {
+    return Math.round(Math.random() * (max - min) + min)
+}
