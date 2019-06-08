@@ -1,7 +1,7 @@
 import Page from 'components/common/Page'
-import PlayButton from 'components/home/PlayButton'
 import Title from 'components/home/Title'
-import { navigate } from 'gatsby'
+import Game from 'components/play/Game'
+import gameValues from 'components/play/gameValues'
 import React from 'react'
 import Style from 'styles'
 
@@ -26,25 +26,32 @@ const styles = {
         marginTop: -50,
         marginLeft: 10,
         userSelect: 'none',
-    },
+    } as const,
 }
 
 export default () => {
-    const play = () => {
-        navigate('/play')
-    }
     return (
-        <Page>
-            <div style={styles.wrapper}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={styles.center}>
-                        <Title />
-                        <div style={{ marginLeft: 50, marginTop: 20 }}>
-                            <PlayButton onClick={play} />
-                        </div>
-                    </div>
-                    <div style={styles.subtitle}>By Maddie Millar</div>
-                </div>
+        <Page
+            style={{
+                backgroundColor: gameValues.background.color,
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column',
+            }}
+        >
+            <div style={{ width: gameValues.board.width, marginTop: -20, marginBottom: 40 }}>
+                <Title />
+                <div style={styles.subtitle}>By Maddie Millar</div>
+            </div>
+            <div
+                style={{
+                    height: gameValues.board.height + 50,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Game />
             </div>
         </Page>
     )

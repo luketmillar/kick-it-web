@@ -6,6 +6,8 @@ import FrameTimer from './frameTimer'
 export default class Controller {
     private readonly frameTimer: FrameTimer
     private readonly onFrame: () => void
+    private readonly onGameWon: () => void
+    private readonly onGameLost: () => void
 
     private readonly gameBall: Components.GameBall
     private effectBalls: Components.EffectBall[]
@@ -18,7 +20,7 @@ export default class Controller {
 
     private lastHitBy: Components.Player | undefined
 
-    constructor(onFrame: () => void) {
+    constructor(onFrame: () => void, onGameWon: () => void, onGameLost: () => void) {
         this.frameTimer = new FrameTimer(this.handleFrame)
 
         this.gameBall = new Components.GameBall()
@@ -48,6 +50,8 @@ export default class Controller {
 
         this.lastHitBy = undefined
         this.onFrame = onFrame
+        this.onGameWon = onGameWon
+        this.onGameLost = onGameLost
     }
 
     public startGame() {
@@ -92,7 +96,6 @@ export default class Controller {
 
     public endGame() {
         this.stop()
-        this.startGame()
     }
 
     public movePlayerUp() {
@@ -116,10 +119,10 @@ export default class Controller {
             this.lastHitBy = this.playerB
         }
         if (this.gameBall.collision(this.leftWall)) {
-            this.endGame()
+            this.onGameWon()
         }
         if (this.gameBall.collision(this.rightWall)) {
-            this.endGame()
+            this.onGameLost()
         }
 
         this.balls.forEach(ball => {

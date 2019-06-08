@@ -13,8 +13,8 @@ export default {
         secondary: '#888',
     },
     button: {
-        default: purple,
-        hover: '#4E12AF',
-        down: '#3B1181',
+        default: aqua,
+        hover: '#1CE3D8',
+        down: '#0CB0A7',
     },
 }
