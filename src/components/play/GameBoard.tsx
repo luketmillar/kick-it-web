@@ -9,8 +9,8 @@ const GameBoard = ({ children }) => (
             position: 'relative',
             borderRadius: 20,
             overflow: 'hidden',
-            border: `4px dashed ${GameValues.board.border}`,
-            // backgroundColor: GameValues.board.color,
+            // border: `4px dashed ${GameValues.board.border}`,
+            backgroundColor: GameValues.board.color,
         }}
     >
         {children}
