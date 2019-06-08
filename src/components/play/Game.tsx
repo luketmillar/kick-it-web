@@ -51,11 +51,19 @@ export default class Game extends React.Component {
     private onKeyDown = e => {
         switch (e.key) {
             case 'i': {
-                this.controller.movePlayerUp()
+                this.controller.movePlayer2Up()
                 return
             }
             case 'k': {
-                this.controller.movePlayerDown()
+                this.controller.movePlayer2Down()
+                return
+            }
+            case 'e': {
+                this.controller.movePlayer1Up()
+                return
+            }
+            case 'd': {
+                this.controller.movePlayer1Down()
                 return
             }
         }

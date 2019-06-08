@@ -3,6 +3,8 @@ import * as Components from './components'
 import * as EffectBalls from './components/effectBalls'
 import FrameTimer from './frameTimer'
 
+const TWO_PLAYERS = false
+
 export default class Controller {
     private readonly frameTimer: FrameTimer
     private readonly onFrame: () => void
@@ -37,7 +39,7 @@ export default class Controller {
                 left: 0,
                 centerY: gameValues.board.height / 2,
             },
-            true
+            !TWO_PLAYERS
         )
         this.playerB = new Components.Player(
             gameValues.player.height,
@@ -64,7 +66,7 @@ export default class Controller {
                 left: 0,
                 centerY: gameValues.board.height / 2,
             },
-            true
+            !TWO_PLAYERS
         )
         this.playerB = new Components.Player(
             gameValues.player.height,
@@ -98,11 +100,25 @@ export default class Controller {
         this.stop()
     }
 
-    public movePlayerUp() {
+    public movePlayer1Up() {
+        if (!TWO_PLAYERS) {
+            return
+        }
+        this.playerA.translate({ y: -1 * this.playerA.movementSpeed })
+    }
+
+    public movePlayer1Down() {
+        if (!TWO_PLAYERS) {
+            return
+        }
+        this.playerA.translate({ y: this.playerA.movementSpeed })
+    }
+
+    public movePlayer2Up() {
         this.playerB.translate({ y: -1 * this.playerB.movementSpeed })
     }
 
-    public movePlayerDown() {
+    public movePlayer2Down() {
         this.playerB.translate({ y: this.playerB.movementSpeed })
     }
 
